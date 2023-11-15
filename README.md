@@ -17,11 +17,11 @@ send message to TelegramBot chat room
 
 在您的 Linux 環境中:
 
-1. sudo apt install jq # 需要安裝 jq
-2. curl telegram_notify.sh -o /usr/local/sbin
-3. chmod a+x /usr/local/sbin/telegram_notify.sh
-4. vim /usr/local/sbin/telegram_notify.sh # 或 nano /usr/local/sbin/telegram_notify.sh
-	* 修改 token="123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11" 取代為你自己的 token
+1. `apt install jq` # 需要安裝 jq
+2. `curl -s -k https://raw.githubusercontent.com/andrewintw/telegram-notify/main/telegram_notify.sh -o /usr/local/sbin/telegram_notify.sh`
+3. `chmod a+x /usr/local/sbin/telegram_notify.sh`
+4. `vim /usr/local/sbin/telegram_notify.sh` # 或 `nano /usr/local/sbin/telegram_notify.sh`
+	* 修改 `token="123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"` 取代為你自己的 token
 
 ## 使用 telegram-notify
 
