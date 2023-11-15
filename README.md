@@ -39,5 +39,8 @@ send message to TelegramBot chat room
 telegram_notify.sh <訊息>
 ```
 
-ex: `telegram_notify.sh "Hello World"` 然後看看 telegram app 有沒有收到訊息
+ex: 執行下面的指令，然後看看 telegram app 有沒有收到訊息
 
+```
+telegram_notify.sh "Hello, send from $(hostname)"
+```
