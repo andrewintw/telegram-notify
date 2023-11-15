@@ -17,11 +17,7 @@ send message to TelegramBot chat room
 
 在您的 Linux 環境中:
 
-1. 安裝 jq
-	```bash
-	apt install jq
-	```
-2. 下載 telegram_notify.sh
+1. 下載 telegram_notify.sh
 	```bash
 	curl -s -k https://raw.githubusercontent.com/andrewintw/telegram-notify/main/telegram_notify.sh \
              -o /usr/local/sbin/telegram_notify.sh
@@ -29,7 +25,7 @@ send message to TelegramBot chat room
  	```
  	chmod a+x /usr/local/sbin/telegram_notify.sh
 	```
-3. 修改 token
+2. 修改 token
 	```
 	vim /usr/local/sbin/telegram_notify.sh
  	或

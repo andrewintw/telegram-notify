@@ -1,7 +1,6 @@
 #! /bin/bash
 
 token="123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11" # Replace it with your bot token
-
 msg="$1"
 
 show_usage() {
@@ -18,29 +17,19 @@ EOF
 
 invoke_api() {
 	local text="$1"
-	local header="Content-Type: application/json"
+	local return=`curl --silent --request GET "https://api.telegram.org/bot${token}/getUpdates?limit=1"`
 
-	local return=`curl --silent --header "${header}" --data '{"limit":"1"}' --request GET https://api.telegram.org/bot${token}/getUpdates`
-	if [ "`echo "${return}" | jq -r .ok`" = "false" ]; then
+	local chk_return=`echo "${return}" | tr ',' '\n' | head -n 1 | grep -w "ok.*true" | wc -l`
+	if [ "$chk_return" = "0" ]; then
 		echo "Token is invalid"
 		exit 1
-	elif [ "`echo "${return}" | jq -r .ok`" = "true" ]; then
-		local chat_id=`echo ${return} | jq -r .result[0].message.chat.id`
-		local data_json=$(jq -c --null-input \
-					--arg chat_id "${chat_id}" \
-					--arg text    "${text}" \
-					'{"chat_id":$chat_id,
-					  "text":$text}')
-		return=`curl --silent --header "${header}" --request POST --data "${data_json}" https://api.telegram.org/bot${token}/sendMessage`
+	elif [ "$chk_return" = "1" ]; then
+		local chat_id=`echo ${return} | tr ',' '\n' | grep -w "chat.*id" | awk -F ':' '{print $3}'`
+		curl --silent --request POST "https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}\&text=${text}" 1>/dev/null
 	fi
 }
 
 send_message() {
-	if [ ! `command -v jq` ]; then
-		echo 'WARN: please install jq: $ sudo apt install jq'
-		exit 1
-	fi
-
 	if [ "$token" = "" ]; then
 		echo "ERROR: Token is null"
 		show_usage
