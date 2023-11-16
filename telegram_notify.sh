@@ -1,4 +1,6 @@
 #! /bin/bash
+# Author: <https://github.com/andrewintw>
+# Copyright (C) 2023 <https://github.com/andrewintw>
 
 token="123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11" # Replace it with your bot token
 msg="$1"
